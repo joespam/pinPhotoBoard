@@ -1,6 +1,7 @@
  class PinsController < ApplicationController
 
 	before_action :find_pin, only: [:destroy, :edit, :show, :update, :upvote]
+	before_action :authenticate_user!, except: [:index, :show]
 
 	def create
 		@pin = current_user.pins.build(pin_params)
