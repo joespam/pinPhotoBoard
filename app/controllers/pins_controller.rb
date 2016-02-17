@@ -1,6 +1,6 @@
-class PinsController < ApplicationController
+ class PinsController < ApplicationController
 
-	before_action :find_pin, only: [:show, :edit, :update, :destroy]
+	before_action :find_pin, only: [:destroy, :edit, :show, :update, :upvote]
 
 	def create
 		@pin = current_user.pins.build(pin_params)
@@ -38,6 +38,12 @@ class PinsController < ApplicationController
 			render 'edit'
 		end
 	end
+
+	def upvote
+		@pin.upvote_by current_user
+		redirect_to :back
+	end
+
 
 	private
 
